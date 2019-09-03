@@ -15,7 +15,8 @@ class AddRelationshipsToProductsTable extends Migration
     {
         Schema::table('products', function(Blueprint $table) {
             $table->integer('category_id')->unsigned()->change();
-            $table->integer('category_id')->references('id')->on('categories')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('category_id')->references('id')->on('categories')
+            ->onUpdate('cascade')->onDelete('cascade');
         });
     }
 
@@ -26,15 +27,15 @@ class AddRelationshipsToProductsTable extends Migration
      */
     public function down()
     {
-        Schema::table('products', function(Blueprint $table){
-            $table->dropForeign('product_category_id_foreign');
+        Schema::table('products', function(Blueprint $table) {
+            $table->dropForiegn('product_category_id_foreign');
         });
 
-        Schema::table('products', function(Blueprint $table){
+        Schema::table('products', function(Blueprint $table) {
             $table->dropIndex('product_category_id_foreign');
         });
 
-        Schema::table('products', function(Blueprint $table){
+        Schema::table('products', function(Blueprint $table) {
             $table->integer('category_id')->change();
         });
     }

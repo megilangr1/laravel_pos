@@ -13,12 +13,14 @@ class AddRelationshipsToOrderTable extends Migration
      */
     public function up()
     {
-        Schema::table('orders', function(Blueprint $table){
+        Schema::table('orders', function(Blueprint $table) {
             $table->integer('customer_id')->unsigned()->change();
-            $table->foreign('cusomers_id')->references('id')->on('customers')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('customer_id')->references('id')->on('customers')
+            ->onUpdate('cascade')->onDelete('cascade');
 
             $table->integer('user_id')->unsigned()->change();
-            $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')
+            ->onUpdate('cascade')->onDelete('cascade');
         });
     }
 
@@ -29,28 +31,28 @@ class AddRelationshipsToOrderTable extends Migration
      */
     public function down()
     {
-        Schema::table('order', function(Blueprint $table){
+        Schema::table('order', function(Blueprint $table) {
             $table->dropForeign('order_customer_id_foreign');
         });
 
-        Schema::table('order', function(Blueprint $table){
+        Schema::table('order', function(Blueprint $table) {
             $table->dropIndex('order_customer_id_foreign');
         });
 
-        Schema::table('order', function(Blueprint $table){
+        Schema::table('order', function(Blueprint $table) {
             $table->integer('customer_id')->change();
         });
 
-        Schema::table('users', function(Blueprint $table){
+        Schema::table('users', function(Blueprint $table) {
             $table->dropForeign('order_user_id_foreign');
         });
 
-        Schema::table('users', function(Blueprint $table){
+        Schema::table('users', function(Blueprint $table) {
             $table->dropIndex('order_customer_id_foreign');
         });
 
         Schema::table('users', function(Blueprint $table) {
             $table->integer('user_id')->change();
-        })
+        });
     }
 }
