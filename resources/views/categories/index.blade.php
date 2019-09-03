@@ -40,11 +40,11 @@
                   @csrf
                   <div class="form-group">
                     <label for="name">Kategori</label>
-                    <input type="text" name="name" id="name" class="form-control" required>
+                    <input type="text" name="name" id="name" class="form-control {{ $errors->has('name') ? 'is-invalid':'' }}" required>
                   </div>
                   <div class="form-group">
                     <label for="description">Deksripsi</label>
-                    <textarea name="description" id="description" cols="5" rows="5" class="form-control"></textarea>
+                    <textarea name="description" id="description" cols="5" rows="5" class="form-control {{ $errors->has('description') ? 'is-invalid':'' }}"></textarea>
                   </div>
                   <div class="form-group">
                     <button class="btn btn-primary btn-block">
